@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+                <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+    <body>
+        <h1>Hey!</h1>
+        <h2>Check out all this movie data</h2>
+        <a href="index.html">Click here to see actor data</a>
+
+          <div ng-app="movie">
+            <div ng-controller="movieController">
+                <ul ng-repeat="movie in movies">
+                    <li>{{movie.title}} {{movie.duur}} {{movie.id}} 
+                   <!-- <li >Movie [{{$index + 1}}] 
+                    <ul>
+    <li>{{movie.title}}</li>
+    <li>{{movie.duur}}</li>
+    <li>{{movie.id}}</li>
+    </ul>--></li>
+                </ul>
+            </div>
+        </div>
+             
+   
+        <script>
+            var app2 = angular.module('movie', []);
+            app2.controller('movieController', function($scope, $http) {
+                $http.get("http://193.191.187.14:10048/WebService/movie")
+                .then(function (response) {$scope.movies = response.data;});
+            });
+      $(document).ready(function(e) {
+        $('#u li').each(function() {
+            if($(this).html().length == 0)
+            {
+                $(this).remove();
+            }
+        });
+    });
+
+	</script> 
+    </body>
+</html>

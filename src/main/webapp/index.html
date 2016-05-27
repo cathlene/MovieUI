@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+    <body>
+        <h1>Hey!</h1>
+        <h2>Check out all this actor data</h2>
+        <a href="movies.html">Click here to see movie data</a>
+         
+         <div ng-app="actor">
+            <div ng-controller="actorController">
+                <ul ng-repeat="actor in actors">
+                    <li> {{actor.voornaam}} {{actor.naam}} {{actor.leeftijd}} {{actor.id}} </li>
+                </ul>
+            </div>
+        </div>        
+   
+        <script>
+            var app = angular.module('actor', []);
+            app.controller('actorController', function($scope, $http) {
+                $http.get("http://193.191.187.14:10048/WebService/actor")
+                .then(function (response) {$scope.actors = response.data;});
+            });
+	</script> 
+    </body>
+</html>
